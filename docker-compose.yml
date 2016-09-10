@@ -1,9 +1,7 @@
 version: '2'
 services:
-    db:
+    database:
         image: mysql:5.6
-        volumes:
-            - ./data/mysql:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=root
     app:
@@ -12,7 +10,7 @@ services:
             - ./app/php.ini:/usr/local/etc/php/php.ini
             - ./data/magento/:/opt/magento/
         links:
-            - db
+            - database
     http:
         image: nginx:1.10.1
         volumes:
