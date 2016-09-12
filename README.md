@@ -20,3 +20,9 @@ Place your auth token at `~/.composer/auth.json`
 ## Run
 
 docker-compose up -d
+
+## Aliases
+
+```
+alias magento='docker-compose exec app ./bin/magento'
+```
