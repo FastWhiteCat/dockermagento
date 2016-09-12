@@ -8,4 +8,4 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 ## Run
 
-docker-compose.exe up -d
+docker-compose up -d
