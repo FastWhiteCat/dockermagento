@@ -26,3 +26,12 @@ RUN docker-php-ext-configure \
     xsl \
     zip \
     opcache
+
+RUN curl -sS https://getcomposer.org/installer | \
+    php -- \
+      --install-dir=/usr/local/bin \
+      --filename=composer \
+      --version=1.1.2
+
+RUN composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /opt/magento
+

@@ -7,6 +7,7 @@ services:
     app:
         build: app/.
         volumes:
+            - ~/.composer/auth.json:~/.composer/auth.json
             - ./app/php.ini:/usr/local/etc/php/php.ini
             - ./data/magento/:/opt/magento/
         links:
