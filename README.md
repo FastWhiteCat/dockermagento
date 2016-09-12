@@ -6,3 +6,6 @@ Dokcer for Magento 2
 
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition data/magento
 
+## Run
+
+docker-compose.exe up -d
