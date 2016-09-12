@@ -2,9 +2,20 @@
 
 Dokcer for Magento 2
 
-## Install Magento
+## Composer Setup
 
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition data/magento
+Place your auth token at `~/.composer/auth.json` 
+
+```
+{
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "MAGENTO_PUBLIC_KEY",
+            "password": "MAGENTO_PRIVATE_KEY"
+        }
+    }
+}
+```
 
 ## Run
 
