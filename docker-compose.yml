@@ -2,13 +2,16 @@ version: '2'
 services:
     database:
         image: mysql:5.6
+        volumes:
+            - ./db/:/docker-entrypoint-initdb.d
         environment:
             - MYSQL_ROOT_PASSWORD=root
     app:
         build: app/.
         volumes:
-            - ~/.composer/auth.json:~/.composer/auth.json
+            - ~/.composer/auth.json:/root/.composer/auth.json
             - ./app/php.ini:/usr/local/etc/php/php.ini
+            - ./app/setup.sh:/usr/local/bin/setup.sh
             - ./data/magento/:/opt/magento/
         links:
             - database

@@ -33,5 +33,7 @@ RUN curl -sS https://getcomposer.org/installer | \
       --filename=composer \
       --version=1.1.2
 
-RUN composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /opt/magento
-
+RUN mkdir /opt/magento
+#USER www-data
+WORKDIR /opt/magento
+CMD setup.sh
