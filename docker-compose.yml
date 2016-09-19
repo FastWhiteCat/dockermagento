@@ -1,5 +1,9 @@
 version: '2'
 services:
+    fs:
+        image: tianon/true
+        volumes:
+            - /opt/magento/
     database:
         image: mysql:5.6
         volumes:
@@ -9,10 +13,11 @@ services:
     app:
         build: app/.
         volumes:
-            - ~/.composer/auth.json:/root/.composer/auth.json
+            - ~/.composer/auth.json:/tmp/auth.json
             - ./app/php.ini:/usr/local/etc/php/php.ini
             - ./app/setup.sh:/usr/local/bin/setup.sh
-            - ./data/magento/:/opt/magento/
+        volumes_from:
+            - fs
         links:
             - database
     http:
@@ -20,7 +25,8 @@ services:
         volumes:
             - ./http/nginx-magento.conf:/etc/nginx/nginx-magento.conf
             - ./http/default.conf:/etc/nginx/conf.d/default.conf
-            - ./data/magento/:/opt/magento/
+        volumes_from:
+            - fs
         links:
             - app:php
         ports:

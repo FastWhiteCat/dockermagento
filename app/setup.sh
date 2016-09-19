@@ -1,8 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "php starting ...";
 
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /opt/magento
+DIR="/opt/magento/"
+
+if [ ! -d "$DIR" ]; then 
+	mkdir $DIR
+fi
+
+if [ ! -d "$(ls -A $DIR)" ]; then
+	echo "Magento install"
+	cp /tmp/auth.json ~/.composer/auth.json
+	composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $DIR
+	cd $DIR
+	find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \;
+	find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \;
+	chmod u+x bin/magento
+fi
 
 php-fpm
 

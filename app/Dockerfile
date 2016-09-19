@@ -34,6 +34,9 @@ RUN curl -sS https://getcomposer.org/installer | \
       --version=1.1.2
 
 RUN mkdir /opt/magento
-#USER www-data
-WORKDIR /opt/magento
+RUN chown -R www-data:www-data /var/www/ /opt/magento/
+VOLUME /opt/magento
+USER www-data
+RUN mkdir ~/.composer/
+WORKDIR /opt/magento/
 CMD setup.sh
