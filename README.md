@@ -24,5 +24,5 @@ docker-compose up -d
 ## Aliases
 
 ```
-alias magento='docker-compose exec app ./bin/magento'
+alias magento='docker exec -it dockermagento_app_1 /opt/magento/bin/magento'
 ```
