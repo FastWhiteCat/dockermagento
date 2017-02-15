@@ -1,14 +1,9 @@
 version: '2'
 services:
-    fs:
-        image: tianon/true
-        volumes:
-            - /opt/magento/
     database:
         image: mysql:5.6
-        volumes:
-            - ./db/:/docker-entrypoint-initdb.d
         environment:
+            - MYSQL_DATABASE=magento
             - MYSQL_ROOT_PASSWORD=root
     app:
         build: app/.
@@ -16,8 +11,6 @@ services:
             - ~/.composer/auth.json:/tmp/auth.json
             - ./app/php.ini:/usr/local/etc/php/php.ini
             - ./app/setup.sh:/usr/local/bin/setup.sh
-        volumes_from:
-            - fs
         links:
             - database
     http:
@@ -26,7 +19,7 @@ services:
             - ./http/nginx-magento.conf:/etc/nginx/nginx-magento.conf
             - ./http/default.conf:/etc/nginx/conf.d/default.conf
         volumes_from:
-            - fs
+            - app
         links:
             - app:php
         ports:
